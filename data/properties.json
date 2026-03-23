@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "title": "דירת 4 חדרים – שכונת נחל בשור",
+    "type": "למכירה",
+    "price": "₪1,750,000",
+    "rooms": 4,
+    "area": 110,
+    "neighborhood": "נחל בשור",
+    "description": "דירה מרווחת בקומה שלישית עם מרפסת שמש גדולה ונוף מרהיב.",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 2,
+    "title": "דירת 3 חדרים – מרכז העיר",
+    "type": "להשכרה",
+    "price": "₪4,500/חודש",
+    "rooms": 3,
+    "area": 80,
+    "neighborhood": "מרכז העיר",
+    "description": "דירה משופצת עם חניה ומחסן בלב ליבה של בית שמש.",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 3,
+    "title": "דירת גן 5 חדרים – רמת בית שמש",
+    "type": "למכירה",
+    "price": "₪2,200,000",
+    "rooms": 5,
+    "area": 145,
+    "neighborhood": "רמת בית שמש",
+    "description": "דירת גן פינתית עם גינה פרטית וחדר ממד.",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 4,
+    "title": "דירת 2 חדרים – גבעת שרת",
+    "type": "להשכרה",
+    "price": "₪3,200/חודש",
+    "rooms": 2,
+    "area": 60,
+    "neighborhood": "גבעת שרת",
+    "description": "דירה קומפקטית ומשופצת.",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 5,
+    "title": "פנטהאוז 6 חדרים – רמת בית שמש",
+    "type": "למכירה",
+    "price": "₪3,500,000",
+    "rooms": 6,
+    "area": 200,
+    "neighborhood": "רמת בית שמש",
+    "description": "פנטהאוז יוקרתי עם גג פרטי.",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 6,
+    "title": "חנות מסחרית – מרכז מסחרי",
+    "type": "למכירה",
+    "price": "₪950,000",
+    "rooms": 1,
+    "area": 55,
+    "neighborhood": "מרכז העיר",
+    "description": "חנות בקניון פעיל עם תנועת לקוחות גבוהה.",
+    "image": "",
+    "active": true
+  },
+  {
+    "id": 7,
+    "title": "דירת 4 חדרים – שכונת הגפן",
+    "type": "נמכר",
+    "price": "₪1,600,000",
+    "rooms": 4,
+    "area": 105,
+    "neighborhood": "שכונת הגפן",
+    "description": "נמכרה בהצלחה!",
+    "image": "",
+    "active": true
+  }
+]
