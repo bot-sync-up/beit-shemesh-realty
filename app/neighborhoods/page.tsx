@@ -1,145 +1,137 @@
+import type { Metadata } from "next";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import BackToTop from "@/components/BackToTop";
-import Link from "next/link";
-import neighborhoodsData from "@/data/neighborhoods.json";
+import Reveal from "@/components/Reveal";
+import NeighborhoodsMap from "@/components/NeighborhoodsMap";
+import { allNeighborhoods, siteSettings } from "@/lib/data";
 
-type Neighborhood = {
-  id: number;
-  name: string;
-  slug: string;
-  character: string;
-  description: string;
-  avgPriceSale: string;
-  avgPriceRent: string;
-  highlights: string[];
-  active: boolean;
+export const metadata: Metadata = {
+  title: "אזורי פעילות ושכונות בית שמש",
+  description: "מדריך מקיף לשכונות בית שמש: אופי, טווחי מחירים, יתרונות ומה שצריך לדעת. כתוב על ידי מתווך ותיק.",
 };
 
 export default function NeighborhoodsPage() {
-  const neighborhoods = (neighborhoodsData as Neighborhood[]).filter((n) => n.active);
-
   return (
     <>
-      <Navbar />
+      <Navbar transparentTop />
       <main>
-        {/* Header */}
-        <section className="bg-gradient-to-br from-[#1A1A2E] to-[#1A6B8A] pt-32 pb-16">
-          <div className="max-w-6xl mx-auto px-4">
-            <span className="inline-block bg-[#D4A843]/20 text-[#D4A843] text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
-              🗺️ מדריך שכונות
-            </span>
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              שכונות בית שמש
+        {/* HERO */}
+        <section className="relative pt-32 pb-12 bg-gradient-to-br from-[#094534] via-[#0F6E56] to-[#1D9E75] text-white overflow-hidden">
+          <div className="absolute -top-32 -right-20 w-[36rem] h-[36rem] bg-[#1D9E75]/40 blur-3xl animate-blob opacity-70" aria-hidden="true" />
+          <div className="container-x relative">
+            <span className="tag bg-white/10 text-[#EF9F27] border border-[#EF9F27]/30">אזורי פעילות</span>
+            <h1 className="text-4xl md:text-6xl font-extrabold mt-4 leading-tight text-balance">
+              מכיר את בית שמש <span className="bg-gradient-to-l from-[#EF9F27] to-[#FFD27F] bg-clip-text text-transparent">משכונה לשכונה.</span>
             </h1>
-            <p className="text-blue-100 text-lg max-w-2xl">
-              מדריך מקיף לכל שכונות בית שמש ורמת בית שמש – מחירים, אופי, יתרונות ומה כדאי לדעת לפני הרכישה
+            <p className="text-emerald-50/90 mt-3 max-w-2xl text-lg">
+              לכל שכונה אופי משלה — אוכלוסייה, מחיר, אטמוספירה. הנה המדריך שלי, אחרי 20 שנה בשטח.
             </p>
           </div>
         </section>
 
-        {/* Intro */}
-        <section className="bg-white py-10 border-b border-gray-100">
-          <div className="max-w-6xl mx-auto px-4">
-            <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
-              {neighborhoods.map((n) => (
-                <a
-                  key={n.id}
-                  href={`#${n.slug}`}
-                  className="text-center py-3 px-2 rounded-xl border border-gray-200 hover:border-[#1A6B8A] hover:bg-[#1A6B8A]/5 transition-all text-sm font-medium text-[#1A1A2E]"
-                >
-                  📍 {n.name}
-                </a>
+        {/* MAP */}
+        <section className="bg-[#FBF8F3] section">
+          <div className="container-x">
+            <Reveal>
+              <div className="mb-8">
+                <span className="tag bg-[#EF9F27]/15 text-[#BA7517]">מפה אינטראקטיבית</span>
+                <h2 className="text-3xl md:text-4xl font-extrabold text-[#0E1B17] mt-3 text-balance">
+                  בחרו שכונה כדי לראות פרטים
+                </h2>
+              </div>
+            </Reveal>
+            <Reveal delay={150}>
+              <NeighborhoodsMap neighborhoods={allNeighborhoods} />
+            </Reveal>
+          </div>
+        </section>
+
+        {/* GRID */}
+        <section className="bg-white section">
+          <div className="container-x">
+            <Reveal>
+              <div className="mb-12 max-w-2xl">
+                <span className="tag bg-[#1D9E75]/10 text-[#0F6E56]">סקירה מלאה</span>
+                <h2 className="text-3xl md:text-4xl font-extrabold text-[#0E1B17] mt-3 text-balance">
+                  כל השכונות. <span className="gradient-text">בקליק.</span>
+                </h2>
+              </div>
+            </Reveal>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {allNeighborhoods.map((n, i) => (
+                <Reveal key={n.id} delay={i * 60}>
+                  <article className="bg-[#FBF8F3] rounded-3xl border border-[#1D9E75]/10 p-6 card-hover h-full flex flex-col">
+                    <div
+                      className="rounded-2xl mb-5 aspect-[16/9] grid place-items-center text-white relative overflow-hidden"
+                      style={{ background: `linear-gradient(135deg, ${n.imageColor}, #094534)` }}
+                    >
+                      <div className="absolute inset-0 opacity-20 mix-blend-overlay"
+                        style={{
+                          backgroundImage: "radial-gradient(rgba(255,255,255,0.9) 1.4px, transparent 1.4px)",
+                          backgroundSize: "20px 20px",
+                        }}
+                      />
+                      <div className="relative text-center">
+                        <div className="text-2xl font-extrabold">{n.name}</div>
+                        <div className="text-xs opacity-90 mt-1 font-semibold">{n.character}</div>
+                      </div>
+                    </div>
+
+                    <p className="text-[#3A4A45] text-sm leading-relaxed mb-4 flex-1">{n.description}</p>
+
+                    <dl className="grid grid-cols-2 gap-3 mb-4 text-sm">
+                      <div>
+                        <dt className="text-xs font-semibold text-[#5A6B66] mb-1">מכירה</dt>
+                        <dd className="font-extrabold text-[#0F6E56] text-[13px]">{n.avgPriceSale}</dd>
+                      </div>
+                      <div>
+                        <dt className="text-xs font-semibold text-[#5A6B66] mb-1">שכירות</dt>
+                        <dd className="font-extrabold text-[#BA7517] text-[13px]">{n.avgPriceRent}</dd>
+                      </div>
+                    </dl>
+
+                    <ul className="space-y-1 mb-5">
+                      {n.highlights.slice(0, 4).map((h) => (
+                        <li key={h} className="flex items-center gap-2 text-xs text-[#5A6B66]">
+                          <span className="text-[#1D9E75]">✓</span> {h}
+                        </li>
+                      ))}
+                    </ul>
+
+                    <Link
+                      href={`/properties?neighborhood=${encodeURIComponent(n.name)}`}
+                      className="text-[#0F6E56] font-bold text-sm hover:underline mt-auto"
+                    >
+                      נכסים זמינים בשכונה ←
+                    </Link>
+                  </article>
+                </Reveal>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Neighborhoods */}
-        <section className="bg-[#F8FAFB] py-16">
-          <div className="max-w-6xl mx-auto px-4 space-y-10">
-            {neighborhoods.map((n, idx) => (
-              <div
-                key={n.id}
-                id={n.slug}
-                className="bg-white rounded-2xl shadow-sm overflow-hidden scroll-mt-24"
-              >
-                <div className={`p-6 md:p-8 border-r-4 ${idx % 2 === 0 ? "border-[#1A6B8A]" : "border-[#D4A843]"}`}>
-                  <div className="grid md:grid-cols-3 gap-6">
-                    {/* Left */}
-                    <div className="md:col-span-2">
-                      <div className="flex items-start gap-3 mb-3">
-                        <span className="text-3xl mt-1">🏘️</span>
-                        <div>
-                          <h2 className="text-2xl font-bold text-[#1A1A2E]">{n.name}</h2>
-                          <p className="text-[#1A6B8A] font-medium text-sm mt-0.5">{n.character}</p>
-                        </div>
-                      </div>
-                      <p className="text-gray-600 leading-relaxed mb-5">{n.description}</p>
-
-                      {/* Highlights */}
-                      <div className="flex flex-wrap gap-2">
-                        {n.highlights.map((h) => (
-                          <span
-                            key={h}
-                            className="bg-[#F8FAFB] border border-gray-200 text-gray-700 text-xs px-3 py-1.5 rounded-full"
-                          >
-                            ✓ {h}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Right - Prices */}
-                    <div className="space-y-4">
-                      <div className="bg-[#1A6B8A]/5 rounded-xl p-4 border border-[#1A6B8A]/20">
-                        <div className="text-xs text-gray-500 mb-1">💰 מחיר ממוצע למכירה</div>
-                        <div className="font-bold text-[#1A1A2E] text-sm">₪{n.avgPriceSale}</div>
-                      </div>
-                      <div className="bg-[#D4A843]/5 rounded-xl p-4 border border-[#D4A843]/20">
-                        <div className="text-xs text-gray-500 mb-1">🔑 שכירות חודשית</div>
-                        <div className="font-bold text-[#1A1A2E] text-sm">₪{n.avgPriceRent}/חודש</div>
-                      </div>
-                      <Link
-                        href={`/properties?neighborhood=${encodeURIComponent(n.name)}`}
-                        className="block text-center bg-[#1A6B8A] text-white py-2.5 rounded-xl text-sm font-bold hover:bg-[#155a73] transition-colors"
-                      >
-                        נכסים ב{n.name} →
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
         {/* CTA */}
-        <section className="bg-[#1A6B8A] py-14">
-          <div className="max-w-3xl mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold text-white mb-3">לא בטוח באיזו שכונה להתחיל?</h2>
-            <p className="text-blue-100 mb-8">
-              עם 20 שנות ניסיון בבית שמש, אוכל לעזור לך למצוא את השכונה שמתאימה בדיוק לצרכים שלך
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                href="/contact"
-                className="bg-white text-[#1A6B8A] px-8 py-3.5 rounded-full font-bold hover:bg-gray-50 transition-colors"
-              >
-                ייעוץ אישי חינם
-              </Link>
-              <a
-                href="tel:0527609172"
-                className="bg-transparent border-2 border-white text-white px-8 py-3.5 rounded-full font-bold hover:bg-white/10 transition-colors"
-              >
-                📞 052-760-9172
-              </a>
-            </div>
+        <section className="bg-[#FBF8F3] py-20">
+          <div className="container-x text-center max-w-2xl mx-auto">
+            <Reveal>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-[#0E1B17] mb-3 text-balance">
+                לא מצאתם את השכונה שלכם?
+              </h2>
+              <p className="text-[#5A6B66] text-lg mb-7">
+                אני מכיר גם שכונות צמודות, ומכסה את כל בית שמש ואת היישובים בסביבה. שאלו אותי.
+              </p>
+              <div className="flex flex-wrap justify-center gap-3">
+                <a href={`https://wa.me/${siteSettings.phoneIntl}`} target="_blank" rel="noopener" className="btn-primary">💬 שלחו לי שאלה</a>
+                <Link href="/contact" className="btn-gold">📞 צרו קשר</Link>
+              </div>
+            </Reveal>
           </div>
         </section>
       </main>
       <Footer />
-      <BackToTop />
     </>
   );
 }
