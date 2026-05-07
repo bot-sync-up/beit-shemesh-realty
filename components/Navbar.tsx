@@ -2,106 +2,141 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Logo from "./Logo";
+import settings from "@/data/settings.json";
 
 const navLinks = [
   { href: "/", label: "דף הבית" },
-  { href: "/about", label: "אודות" },
+  { href: "/about", label: "אודותי" },
   { href: "/properties", label: "נכסים" },
-  { href: "/neighborhoods", label: "שכונות" },
-  { href: "/faq", label: "שאלות נפוצות" },
-  { href: "/blog", label: "בלוג" },
+  { href: "/neighborhoods", label: "אזורי פעילות" },
+  { href: "/testimonials", label: "המלצות" },
   { href: "/contact", label: "צור קשר" },
 ];
 
-export default function Navbar() {
+export default function Navbar({ transparentTop = false }: { transparentTop?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const transparent = transparentTop && !scrolled;
+  const closeMenu = () => setOpen(false);
 
   return (
     <nav
-      className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-white shadow-md py-2" : "bg-transparent py-4"
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        transparent
+          ? "bg-transparent py-4"
+          : "bg-white/95 backdrop-blur-md shadow-[0_8px_30px_-12px_rgba(15,110,86,0.18)] py-2"
       }`}
     >
-      <div className="max-w-6xl mx-auto px-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-full bg-[#1A6B8A] flex items-center justify-center">
-            <span className="text-white font-bold text-lg">נ</span>
-          </div>
-          <div className="leading-tight">
-            <div className={`font-bold text-base ${scrolled ? "text-[#1A1A2E]" : "text-white"}`}>
-              מתווך נדל&quot;ן
-            </div>
-            <div className={`text-xs ${scrolled ? "text-[#1A6B8A]" : "text-[#D4A843]"}`}>
-              בית שמש
-            </div>
-          </div>
+      <div className="container-x flex items-center justify-between">
+        <Link href="/" className="shrink-0">
+          <Logo variant={transparent ? "light" : "dark"} size="md" />
         </Link>
 
-        <ul className="hidden lg:flex items-center gap-4">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className={`font-medium text-sm transition-colors hover:text-[#D4A843] ${
-                  pathname === link.href
-                    ? "text-[#D4A843]"
-                    : scrolled
-                    ? "text-[#1A1A2E]"
-                    : "text-white"
-                }`}
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-          <li>
+        <ul className="hidden lg:flex items-center gap-1">
+          {navLinks.map((link) => {
+            const active = pathname === link.href;
+            return (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className={`relative px-3.5 py-2 text-[15px] font-semibold rounded-full transition-colors ${
+                    active
+                      ? transparent
+                        ? "text-[#EF9F27]"
+                        : "text-[#0F6E56] bg-[#1D9E75]/10"
+                      : transparent
+                      ? "text-white/90 hover:text-[#EF9F27]"
+                      : "text-[#0E1B17] hover:text-[#0F6E56]"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            );
+          })}
+          <li className="ms-3 flex items-center gap-2">
             <a
-              href="tel:0527609172"
-              className="bg-[#D4A843] text-white px-4 py-2 rounded-full font-semibold hover:bg-[#b8922e] transition-colors text-sm"
+              href={`https://wa.me/${settings.phoneIntl}`}
+              target="_blank"
+              rel="noopener"
+              className="btn-primary !py-2 !px-4 !text-sm"
             >
-              📞 052-760-9172
+              <span aria-hidden="true">💬</span> WhatsApp
+            </a>
+            <a
+              href={`tel:${settings.phoneRaw}`}
+              className={`text-sm font-bold ${transparent ? "text-white" : "text-[#0F6E56]"}`}
+            >
+              {settings.phone}
             </a>
           </li>
         </ul>
 
         <button
-          className="lg:hidden flex flex-col gap-1.5 p-2"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="תפריט"
+          onClick={() => setOpen((v) => !v)}
+          aria-label="פתח תפריט"
+          aria-expanded={open}
+          className={`lg:hidden p-2 rounded-lg transition ${
+            transparent ? "text-white" : "text-[#0E1B17]"
+          }`}
         >
-          <span className={`block w-6 h-0.5 ${scrolled ? "bg-[#1A1A2E]" : "bg-white"}`} />
-          <span className={`block w-6 h-0.5 ${scrolled ? "bg-[#1A1A2E]" : "bg-white"}`} />
-          <span className={`block w-6 h-0.5 ${scrolled ? "bg-[#1A1A2E]" : "bg-white"}`} />
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
+            {open ? (
+              <>
+                <line x1="6" y1="6" x2="18" y2="18" />
+                <line x1="6" y1="18" x2="18" y2="6" />
+              </>
+            ) : (
+              <>
+                <line x1="4" y1="7" x2="20" y2="7" />
+                <line x1="4" y1="12" x2="20" y2="12" />
+                <line x1="4" y1="17" x2="20" y2="17" />
+              </>
+            )}
+          </svg>
         </button>
       </div>
 
-      {menuOpen && (
-        <div className="lg:hidden bg-white shadow-lg border-t border-gray-100">
-          <ul className="flex flex-col">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className={`block px-6 py-3 font-medium hover:bg-[#F8FAFB] ${
-                    pathname === link.href ? "text-[#1A6B8A]" : "text-[#1A1A2E]"
-                  }`}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-            <li className="px-6 py-3">
-              <a href="tel:0527609172" className="block bg-[#D4A843] text-white text-center py-2.5 rounded-full font-bold">
-                📞 052-760-9172
+      {open && (
+        <div className="lg:hidden bg-white border-t border-[#1D9E75]/10 animate-fade-up">
+          <ul className="flex flex-col py-2">
+            {navLinks.map((link) => {
+              const active = pathname === link.href;
+              return (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    onClick={closeMenu}
+                    className={`block px-6 py-3 font-semibold ${
+                      active ? "text-[#0F6E56] bg-[#1D9E75]/8" : "text-[#0E1B17]"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              );
+            })}
+            <li className="px-6 py-3 flex flex-col gap-2">
+              <a
+                href={`https://wa.me/${settings.phoneIntl}`}
+                target="_blank"
+                rel="noopener"
+                className="btn-primary justify-center"
+              >
+                💬 שלחו הודעת WhatsApp
+              </a>
+              <a href={`tel:${settings.phoneRaw}`} className="btn-gold justify-center">
+                📞 {settings.phone}
               </a>
             </li>
           </ul>
