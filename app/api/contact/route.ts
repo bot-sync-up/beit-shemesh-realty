@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import settings from "@/data/settings.json";
+import { getJson, putJson } from "@/lib/storage";
+import type { Lead } from "@/lib/types";
 
 export async function POST(req: NextRequest) {
   let body: Record<string, unknown>;
@@ -22,6 +24,24 @@ export async function POST(req: NextRequest) {
   }
   if (!consent) {
     return NextResponse.json({ error: "יש לאשר את מדיניות הפרטיות" }, { status: 400 });
+  }
+
+  // Persist as a lead (always, regardless of SMTP)
+  try {
+    const existing = (await getJson<Lead[]>("data/leads.json")) ?? [];
+    const lead: Lead = {
+      id: `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`,
+      createdAt: new Date().toISOString(),
+      name,
+      phone,
+      email: email || undefined,
+      subject: subject || undefined,
+      message: message || undefined,
+      read: false,
+    };
+    await putJson("data/leads.json", [lead, ...existing]);
+  } catch (e) {
+    console.error("Failed to persist lead:", e);
   }
 
   // SMTP not configured → log and return success (demo / staging mode)
