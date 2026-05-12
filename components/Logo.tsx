@@ -3,7 +3,7 @@ type Props = { variant?: "light" | "dark"; size?: "sm" | "md" | "lg" };
 export default function Logo({ variant = "dark", size = "md" }: Props) {
   const dim = size === "sm" ? 36 : size === "lg" ? 56 : 44;
   const titleClass = variant === "light" ? "text-white" : "text-[#0E1B17]";
-  const subClass = variant === "light" ? "text-white/90" : "text-[#0F6E56]";
+  const subClass = variant === "light" ? "text-white" : "text-[#0F6E56]";
 
   return (
     <div className="flex items-center gap-3">
