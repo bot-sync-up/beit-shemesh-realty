@@ -8,6 +8,8 @@ import { siteSettings } from "@/lib/data";
 export const metadata: Metadata = {
   title: "אודותי",
   description: "20 שנות ניסיון בנדל\"ן בבית שמש. ערכים, שיטת עבודה ומה שמייחד אותי.",
+  alternates: { canonical: "/about" },
+  openGraph: { url: "/about" },
 };
 
 export default function AboutPage() {

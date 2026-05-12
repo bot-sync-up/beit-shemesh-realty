@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "תנאי שימוש ועמלות תיווך",
   description: "תנאי שימוש באתר הכתובת הנכונה ותעריפי עמלות תיווך, בהתאם לחוק המתווכים במקרקעין.",
+  alternates: { canonical: "/terms" },
+  openGraph: { url: "/terms" },
 };
 
 export default function TermsPage() {

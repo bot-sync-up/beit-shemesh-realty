@@ -8,6 +8,8 @@ import { getActiveProperties, allNeighborhoods } from "@/lib/data";
 export const metadata: Metadata = {
   title: 'נכסים זמינים | דירות למכירה ולהשכרה בבית שמש',
   description: 'מבחר עדכני של דירות למכירה ולהשכרה, פנטהאוזים, בתים פרטיים, מסחרי וקרקעות בבית שמש. סינון בזמן אמת.',
+  alternates: { canonical: "/properties" },
+  openGraph: { url: "/properties" },
 };
 
 export default function PropertiesPage() {

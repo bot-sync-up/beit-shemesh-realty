@@ -6,6 +6,8 @@ import { siteSettings } from "@/lib/data";
 export const metadata: Metadata = {
   title: "הצהרת נגישות",
   description: "הצהרת הנגישות של אתר הכתובת הנכונה — תיווך נדל\"ן בבית שמש.",
+  alternates: { canonical: "/accessibility" },
+  openGraph: { url: "/accessibility" },
 };
 
 export default function AccessibilityPage() {

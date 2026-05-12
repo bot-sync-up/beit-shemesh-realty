@@ -9,6 +9,8 @@ import { allNeighborhoods, siteSettings } from "@/lib/data";
 export const metadata: Metadata = {
   title: "אזורי פעילות ושכונות בית שמש",
   description: "מדריך מקיף לשכונות בית שמש: אופי, טווחי מחירים, יתרונות ומה שצריך לדעת. כתוב על ידי מתווך ותיק.",
+  alternates: { canonical: "/neighborhoods" },
+  openGraph: { url: "/neighborhoods" },
 };
 
 export default function NeighborhoodsPage() {

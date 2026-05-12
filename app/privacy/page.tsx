@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "מדיניות פרטיות",
   description: "מדיניות הפרטיות של אתר הכתובת הנכונה — איך אנחנו מטפלים במידע שלכם.",
+  alternates: { canonical: "/privacy" },
+  openGraph: { url: "/privacy" },
 };
 
 export default function PrivacyPage() {
