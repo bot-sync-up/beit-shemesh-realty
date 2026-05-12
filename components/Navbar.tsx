@@ -133,10 +133,12 @@ export default function Navbar({ transparentTop = false }: { transparentTop?: bo
                 rel="noopener"
                 className="btn-primary justify-center"
               >
-                💬 שלחו הודעת WhatsApp
+                <span aria-hidden="true">💬</span>
+                <span>שלחו הודעת WhatsApp</span>
               </a>
               <a href={`tel:${settings.phoneRaw}`} className="btn-gold justify-center">
-                📞 {settings.phone}
+                <span aria-hidden="true">📞</span>
+                <span dir="ltr" style={{ unicodeBidi: "isolate" }}>{settings.phone}</span>
               </a>
             </li>
           </ul>

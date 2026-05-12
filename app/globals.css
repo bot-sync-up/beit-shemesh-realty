@@ -233,6 +233,25 @@ input, select, textarea {
   font-family: inherit;
 }
 
+/* ============== FOCUS VISIBLE (a11y) ============== */
+:focus { outline: none; }
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 3px solid #EF9F27;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+input[type="checkbox"]:focus-visible,
+input[type="radio"]:focus-visible {
+  outline: 2px solid #EF9F27;
+  outline-offset: 3px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;

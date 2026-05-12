@@ -124,8 +124,14 @@ export default function NeighborhoodsPage() {
                 אני מכיר גם שכונות צמודות, ומכסה את כל בית שמש ואת היישובים בסביבה. שאלו אותי.
               </p>
               <div className="flex flex-wrap justify-center gap-3">
-                <a href={`https://wa.me/${siteSettings.phoneIntl}`} target="_blank" rel="noopener" className="btn-primary">💬 שלחו לי שאלה</a>
-                <Link href="/contact" className="btn-gold">📞 צרו קשר</Link>
+                <a href={`https://wa.me/${siteSettings.phoneIntl}`} target="_blank" rel="noopener" className="btn-primary">
+                  <span aria-hidden="true">💬</span>
+                  <span>שלחו לי שאלה</span>
+                </a>
+                <Link href="/contact" className="btn-gold">
+                  <span aria-hidden="true">📞</span>
+                  <span>צרו קשר</span>
+                </Link>
               </div>
             </Reveal>
           </div>

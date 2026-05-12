@@ -115,14 +115,14 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* CALENDLY */}
+        {/* SCHEDULE */}
         <section id="calendly" className="bg-white section">
           <div className="container-x">
             <Reveal>
               <div className="text-center max-w-2xl mx-auto mb-8">
                 <span className="tag bg-[#EF9F27]/15 text-[#BA7517]">קביעת פגישה</span>
                 <h2 className="text-3xl md:text-4xl font-extrabold text-[#0E1B17] mt-3 text-balance">
-                  בחרו מועד שנוח לכם <span className="gradient-text">ביומן.</span>
+                  בחרו מועד שנוח לכם <span className="gradient-text">ונדבר.</span>
                 </h2>
                 <p className="text-[#5A6B66] mt-3 text-lg">
                   פגישת היכרות וירטואלית או טלפונית, 30 דקות, ללא עלות.
@@ -130,21 +130,55 @@ export default function ContactPage() {
               </div>
             </Reveal>
 
-            <Reveal delay={150}>
-              <div className="rounded-3xl overflow-hidden border border-[#1D9E75]/15 shadow-md">
-                <iframe
-                  src={siteSettings.calendlyUrl}
-                  width="100%"
-                  height="700"
-                  style={{ border: 0, minHeight: 700 }}
-                  title="קביעת פגישה ב-Calendly"
-                />
-              </div>
-            </Reveal>
+            {siteSettings.calendlyUrl ? (
+              <Reveal delay={150}>
+                <div className="rounded-3xl overflow-hidden border border-[#1D9E75]/15 shadow-md">
+                  <iframe
+                    src={siteSettings.calendlyUrl}
+                    width="100%"
+                    height="700"
+                    style={{ border: 0, minHeight: 700 }}
+                    title="קביעת פגישה"
+                  />
+                </div>
+              </Reveal>
+            ) : (
+              <Reveal delay={150}>
+                <div className="grid md:grid-cols-3 gap-5 max-w-4xl mx-auto">
+                  <a
+                    href={`tel:${siteSettings.phoneRaw}`}
+                    className="bg-gradient-to-br from-[#1D9E75] to-[#0F6E56] text-white rounded-3xl p-7 text-center shadow-xl shadow-[#0F6E56]/15 hover:scale-[1.02] transition-transform"
+                  >
+                    <div className="w-14 h-14 rounded-2xl bg-white/15 grid place-items-center text-3xl mx-auto mb-4" aria-hidden="true">📞</div>
+                    <div className="font-extrabold text-lg mb-1">חייגו עכשיו</div>
+                    <div className="text-sm opacity-90" dir="ltr" style={{ unicodeBidi: "isolate" }}>{siteSettings.phone}</div>
+                    <div className="text-xs opacity-75 mt-1">{siteSettings.availability}</div>
+                  </a>
+                  <a
+                    href={`https://wa.me/${siteSettings.phoneIntl}?text=${encodeURIComponent("שלום, אשמח לקבוע פגישת היכרות")}`}
+                    target="_blank"
+                    rel="noopener"
+                    className="bg-white border border-[#1D9E75]/15 rounded-3xl p-7 text-center shadow-md hover:shadow-xl hover:shadow-[#0F6E56]/10 transition-shadow"
+                  >
+                    <div className="w-14 h-14 rounded-2xl bg-[#25D366]/15 text-[#25D366] grid place-items-center text-3xl mx-auto mb-4" aria-hidden="true">💬</div>
+                    <div className="font-extrabold text-lg text-[#0E1B17] mb-1">WhatsApp</div>
+                    <div className="text-sm text-[#5A6B66]">תאמו פגישה בהודעה אחת</div>
+                  </a>
+                  <a
+                    href={`mailto:${siteSettings.email}?subject=${encodeURIComponent("בקשה לקביעת פגישה")}`}
+                    className="bg-white border border-[#1D9E75]/15 rounded-3xl p-7 text-center shadow-md hover:shadow-xl hover:shadow-[#0F6E56]/10 transition-shadow"
+                  >
+                    <div className="w-14 h-14 rounded-2xl bg-[#EF9F27]/15 text-[#BA7517] grid place-items-center text-3xl mx-auto mb-4" aria-hidden="true">✉️</div>
+                    <div className="font-extrabold text-lg text-[#0E1B17] mb-1">אימייל</div>
+                    <div className="text-xs text-[#5A6B66] break-all">{siteSettings.emailDisplay}</div>
+                  </a>
+                </div>
+              </Reveal>
+            )}
 
             <Reveal delay={250}>
-              <p className="text-center text-sm text-[#5A6B66] mt-5">
-                מעדיפים מועד אחר? <a href={`https://wa.me/${siteSettings.phoneIntl}`} target="_blank" rel="noopener" className="text-[#0F6E56] font-bold hover:underline">שלחו לי הודעה</a>
+              <p className="text-center text-sm text-[#5A6B66] mt-8">
+                העדפה אחרת? <a href={`https://wa.me/${siteSettings.phoneIntl}`} target="_blank" rel="noopener" className="text-[#0F6E56] font-bold hover:underline">שלחו לי הודעה</a> ואחזור אליכם.
               </p>
             </Reveal>
           </div>

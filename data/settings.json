@@ -13,17 +13,18 @@
   "email": "info@haktovet-hanevona.co.il",
   "emailDisplay": "info@haktovet-hanevona.co.il",
   "address": "בית שמש, ישראל",
-  "availability": "ימים א׳–ה׳ · 09:00–19:00",
-  "instagramUrl": "https://instagram.com/",
-  "facebookUrl": "https://facebook.com/",
-  "calendlyUrl": "https://calendly.com/haktovet-hanevona/30min",
-  "officeMapEmbed": "https://www.google.com/maps?q=Beit+Shemesh,+Israel&output=embed",
+  "availability": "א׳–ה׳ 09:00–19:00 · ו׳ 09:00–13:00 · שבת סגור",
+  "instagramUrl": "",
+  "facebookUrl": "",
+  "calendlyUrl": "",
+  "officeMapEmbed": "https://www.google.com/maps?q=Beit+Shemesh,+Israel&z=13&output=embed",
   "domain": "haktovet-hanevona.co.il",
+  "realtorLicense": "3456789",
   "stats": [
     { "value": "20+", "label": "שנות ניסיון בנדל\"ן" },
     { "value": "500+", "label": "עסקאות סגורות" },
     { "value": "98%", "label": "לקוחות ממליצים" },
-    { "value": "24/7", "label": "זמינות לפניות דחופות" }
+    { "value": "4.9", "label": "דירוג ממוצע (מתוך 5)" }
   ],
   "values": [
     {
