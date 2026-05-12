@@ -1,7 +1,9 @@
-import properties from "@/data/properties.json";
+import { cache } from "react";
+import propertiesJson from "@/data/properties.json";
 import neighborhoods from "@/data/neighborhoods.json";
 import testimonials from "@/data/testimonials.json";
 import settings from "@/data/settings.json";
+import { getJson } from "@/lib/storage";
 
 export type PropertyType = "למכירה" | "להשכרה" | "נמכר";
 export type PropertyCategory = "דירה" | "דירת גן" | "פנטהאוז" | "בית פרטי" | "מסחרי" | "קרקע";
@@ -53,21 +55,44 @@ export type Testimonial = {
 
 export type Settings = typeof settings;
 
-export const allProperties = properties as Property[];
 export const allNeighborhoods = neighborhoods as Neighborhood[];
 export const allTestimonials = testimonials as Testimonial[];
 export const siteSettings = settings as Settings;
+const seedProperties = propertiesJson as Property[];
+const seedNeighborhoods = neighborhoods as Neighborhood[];
+const seedTestimonials = testimonials as Testimonial[];
+const seedSettings = settings as Settings;
 
-export function getActiveProperties(): Property[] {
-  return allProperties.filter((p) => p.status !== "hidden");
+export const getSettings = cache(async (): Promise<Settings> => {
+  return (await getJson<Settings>("data/settings.json")) ?? seedSettings;
+});
+
+export const getTestimonials = cache(async (): Promise<Testimonial[]> => {
+  return (await getJson<Testimonial[]>("data/testimonials.json")) ?? seedTestimonials;
+});
+
+export const getNeighborhoods = cache(async (): Promise<Neighborhood[]> => {
+  return (await getJson<Neighborhood[]>("data/neighborhoods.json")) ?? seedNeighborhoods;
+});
+
+export const getAllProperties = cache(async (): Promise<Property[]> => {
+  const fromStore = await getJson<Property[]>("data/properties.json");
+  return fromStore ?? seedProperties;
+});
+
+export async function getActiveProperties(): Promise<Property[]> {
+  const all = await getAllProperties();
+  return all.filter((p) => p.status !== "hidden");
 }
 
-export function getFeaturedProperties(): Property[] {
-  return allProperties.filter((p) => p.featured && p.status === "active");
+export async function getFeaturedProperties(): Promise<Property[]> {
+  const all = await getAllProperties();
+  return all.filter((p) => p.featured && p.status === "active");
 }
 
-export function getPropertyById(id: number): Property | undefined {
-  return allProperties.find((p) => p.id === id);
+export async function getPropertyById(id: number): Promise<Property | undefined> {
+  const all = await getAllProperties();
+  return all.find((p) => p.id === id);
 }
 
 export function getNeighborhoodBySlug(slug: string): Neighborhood | undefined {

@@ -4,7 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import BackToTop from "@/components/BackToTop";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import settings from "@/data/settings.json";
+import { getSettings } from "@/lib/data";
 
 const assistant = Assistant({
   subsets: ["hebrew", "latin"],
@@ -62,27 +62,28 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-const schemaOrg = {
-  "@context": "https://schema.org",
-  "@type": "RealEstateAgent",
-  name: "הכתובת הנכונה",
-  alternateName: settings.brandEn,
-  description: settings.tagline,
-  url: SITE_URL,
-  telephone: settings.phoneRaw,
-  email: settings.email,
-  image: `${SITE_URL}/og-image.svg`,
-  logo: `${SITE_URL}/logo.svg`,
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "בית שמש",
-    addressCountry: "IL",
-  },
-  areaServed: ["בית שמש", "רמת בית שמש", "הר טוב"],
-  sameAs: [settings.facebookUrl, settings.instagramUrl].filter(Boolean),
-};
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const settings = await getSettings();
+  const schemaOrg = {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    name: "הכתובת הנכונה",
+    alternateName: settings.brandEn,
+    description: settings.tagline,
+    url: SITE_URL,
+    telephone: settings.phoneRaw,
+    email: settings.email,
+    image: `${SITE_URL}/og-image.svg`,
+    logo: `${SITE_URL}/logo.svg`,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "בית שמש",
+      addressCountry: "IL",
+    },
+    areaServed: ["בית שמש", "רמת בית שמש", "הר טוב"],
+    sameAs: [settings.facebookUrl, settings.instagramUrl].filter(Boolean),
+  };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="he" dir="rtl" className={assistant.variable}>
       <head>
@@ -95,7 +96,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       </head>
       <body className="min-h-screen flex flex-col font-[family-name:var(--font-assistant)] antialiased">
         {children}
-        <WhatsAppButton />
+        <WhatsAppButton phoneIntl={settings.phoneIntl} defaultMessage={settings.whatsappMessage} />
         <BackToTop />
 
         {settings.gaId && (

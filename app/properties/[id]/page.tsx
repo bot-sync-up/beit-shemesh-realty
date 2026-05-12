@@ -6,19 +6,23 @@ import Footer from "@/components/Footer";
 import PropertyGallery from "@/components/PropertyGallery";
 import PropertyCard from "@/components/PropertyCard";
 import Reveal from "@/components/Reveal";
-import { allProperties, getPropertyById, siteSettings } from "@/lib/data";
+import { getAllProperties, getPropertyById, getSettings } from "@/lib/data";
 
 type RouteParams = { id: string };
 
-export function generateStaticParams() {
-  return allProperties.map((p) => ({ id: String(p.id) }));
+export const revalidate = 60;
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  const all = await getAllProperties();
+  return all.map((p) => ({ id: String(p.id) }));
 }
 
 export async function generateMetadata(
   { params }: { params: Promise<RouteParams> },
 ): Promise<Metadata> {
   const { id } = await params;
-  const property = getPropertyById(parseInt(id, 10));
+  const property = await getPropertyById(parseInt(id, 10));
   if (!property) return { title: "נכס לא נמצא" };
   const path = `/properties/${id}`;
   return {
@@ -36,10 +40,14 @@ export async function generateMetadata(
 
 export default async function PropertyPage({ params }: { params: Promise<RouteParams> }) {
   const { id } = await params;
-  const property = getPropertyById(parseInt(id, 10));
+  const [property, all, siteSettings] = await Promise.all([
+    getPropertyById(parseInt(id, 10)),
+    getAllProperties(),
+    getSettings(),
+  ]);
   if (!property) notFound();
 
-  const related = allProperties
+  const related = all
     .filter((p) => p.id !== property.id && p.neighborhood === property.neighborhood && p.status === "active")
     .slice(0, 3);
 

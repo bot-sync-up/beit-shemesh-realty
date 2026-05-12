@@ -1,10 +1,10 @@
 import { MetadataRoute } from "next";
-import { allProperties } from "@/lib/data";
+import { getAllProperties } from "@/lib/data";
 import settings from "@/data/settings.json";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || `https://${settings.domain}`;
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
   const staticPages: MetadataRoute.Sitemap = [
     { url: BASE_URL,                      lastModified: now, changeFrequency: "weekly",  priority: 1.0 },
@@ -17,7 +17,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/privacy`,         lastModified: now, changeFrequency: "yearly",  priority: 0.3 },
   ];
 
-  const propertyPages: MetadataRoute.Sitemap = allProperties
+  const all = await getAllProperties();
+  const propertyPages: MetadataRoute.Sitemap = all
     .filter((p) => p.status !== "hidden")
     .map((p) => ({
       url: `${BASE_URL}/properties/${p.id}`,

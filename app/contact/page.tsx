@@ -3,7 +3,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
-import { siteSettings } from "@/lib/data";
+import { getSettings } from "@/lib/data";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "צור קשר",
@@ -12,7 +14,8 @@ export const metadata: Metadata = {
   openGraph: { url: "/contact" },
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const siteSettings = await getSettings();
   return (
     <>
       <Navbar transparentTop />

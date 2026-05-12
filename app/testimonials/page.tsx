@@ -3,7 +3,9 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
-import { allTestimonials, siteSettings } from "@/lib/data";
+import { getTestimonials, getSettings } from "@/lib/data";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "המלצות לקוחות",
@@ -12,7 +14,8 @@ export const metadata: Metadata = {
   openGraph: { url: "/testimonials" },
 };
 
-export default function TestimonialsPage() {
+export default async function TestimonialsPage() {
+  const [allTestimonials, siteSettings] = await Promise.all([getTestimonials(), getSettings()]);
   return (
     <>
       <Navbar transparentTop />

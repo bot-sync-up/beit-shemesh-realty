@@ -1,8 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
-import settings from "@/data/settings.json";
 
-export default function WhatsAppButton({ message }: { message?: string }) {
+type Props = {
+  phoneIntl: string;
+  defaultMessage: string;
+  message?: string;
+};
+
+export default function WhatsAppButton({ phoneIntl, defaultMessage, message }: Props) {
   const [shown, setShown] = useState(false);
 
   useEffect(() => {
@@ -10,8 +15,8 @@ export default function WhatsAppButton({ message }: { message?: string }) {
     return () => clearTimeout(t);
   }, []);
 
-  const text = message || settings.whatsappMessage;
-  const href = `https://wa.me/${settings.phoneIntl}?text=${encodeURIComponent(text)}`;
+  const text = message || defaultMessage;
+  const href = `https://wa.me/${phoneIntl}?text=${encodeURIComponent(text)}`;
 
   return (
     <a

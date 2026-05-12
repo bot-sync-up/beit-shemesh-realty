@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { siteSettings } from "@/lib/data";
+import { getSettings } from "@/lib/data";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "הצהרת נגישות",
@@ -10,7 +12,8 @@ export const metadata: Metadata = {
   openGraph: { url: "/accessibility" },
 };
 
-export default function AccessibilityPage() {
+export default async function AccessibilityPage() {
+  const siteSettings = await getSettings();
   const lastUpdated = "מאי 2026";
 
   return (
