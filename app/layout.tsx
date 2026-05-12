@@ -54,7 +54,6 @@ export const metadata: Metadata = {
     images: ["/og-image.svg"],
   },
   robots: { index: true, follow: true },
-  icons: { icon: "/favicon.ico" },
 };
 
 export const viewport: Viewport = {
