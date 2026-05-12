@@ -67,10 +67,12 @@ export default function Home() {
                   rel="noopener"
                   className="btn-ghost"
                 >
-                  💬 שלחו לי הודעה
+                  <span aria-hidden="true">💬</span>
+                  <span>שלחו לי הודעה</span>
                 </a>
                 <Link href="/contact#calendly" className="btn-ghost">
-                  📅 קביעת פגישה
+                  <span aria-hidden="true">📅</span>
+                  <span>קביעת פגישה</span>
                 </Link>
               </div>
 
@@ -78,7 +80,13 @@ export default function Home() {
               <dl className="grid grid-cols-3 gap-6 mt-12 max-w-xl animate-fade-up delay-400">
                 {siteSettings.stats.slice(0, 3).map((s) => (
                   <div key={s.label} className="border-s-2 border-[#EF9F27]/60 ps-4">
-                    <dt className="text-2xl md:text-3xl font-extrabold text-white tabular-nums">{s.value}</dt>
+                    <dt
+                      className="text-2xl md:text-3xl font-extrabold text-white tabular-nums"
+                      dir="ltr"
+                      style={{ unicodeBidi: "isolate" }}
+                    >
+                      {s.value}
+                    </dt>
                     <dd className="text-sm text-emerald-100/80">{s.label}</dd>
                   </div>
                 ))}
@@ -379,10 +387,12 @@ export default function Home() {
                   rel="noopener"
                   className="btn-ghost"
                 >
-                  💬 WhatsApp
+                  <span aria-hidden="true">💬</span>
+                  <span>WhatsApp</span>
                 </a>
                 <a href={`tel:${siteSettings.phoneRaw}`} className="btn-ghost">
-                  📞 {siteSettings.phone}
+                  <span aria-hidden="true">📞</span>
+                  <span dir="ltr" style={{ unicodeBidi: "isolate" }}>{siteSettings.phone}</span>
                 </a>
               </div>
             </Reveal>

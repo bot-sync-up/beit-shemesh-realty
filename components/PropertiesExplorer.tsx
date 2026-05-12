@@ -34,7 +34,7 @@ export default function PropertiesExplorer({
 
   const maxPriceCap = useMemo(() => {
     const m = Math.max(...properties.filter(p => p.type !== "להשכרה").map(p => p.price));
-    return Math.ceil(m / 100000) * 100000;
+    return Math.max(Math.ceil(m / 100000) * 100000, 5000000);
   }, [properties]);
 
   useEffect(() => {

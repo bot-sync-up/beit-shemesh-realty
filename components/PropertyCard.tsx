@@ -61,7 +61,7 @@ export default function PropertyCard({ property }: { property: Property }) {
       </div>
 
       <div className="p-5">
-        <h3 className="font-bold text-[17px] text-[#0E1B17] mb-2 line-clamp-1 group-hover:text-[#0F6E56] transition-colors">
+        <h3 className="font-bold text-[17px] text-[#0E1B17] mb-2 line-clamp-2 min-h-[3.25rem] group-hover:text-[#0F6E56] transition-colors">
           {property.title}
         </h3>
         <p className="text-sm text-[#5A6B66] mb-4 line-clamp-2 leading-relaxed">

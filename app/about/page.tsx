@@ -33,7 +33,10 @@ export default function AboutPage() {
                 את אותו השירות: אישי, מקצועי, ובלי טריקים.
               </p>
               <div className="flex flex-wrap gap-3 mt-8 animate-fade-up delay-300">
-                <a href={`https://wa.me/${siteSettings.phoneIntl}`} target="_blank" rel="noopener" className="btn-gold">💬 דברו איתי</a>
+                <a href={`https://wa.me/${siteSettings.phoneIntl}`} target="_blank" rel="noopener" className="btn-gold">
+                  <span aria-hidden="true">💬</span>
+                  <span>דברו איתי</span>
+                </a>
                 <Link href="/contact" className="btn-ghost">קבעו פגישה</Link>
               </div>
             </div>
@@ -151,8 +154,14 @@ export default function AboutPage() {
                   פגישת היכרות חינם, ללא התחייבות. נראה אם אנחנו מתאימים — ואם כן, ניצא לדרך.
                 </p>
                 <div className="flex flex-wrap justify-center gap-3">
-                  <Link href="/contact#calendly" className="btn-gold">📅 קבעו פגישה</Link>
-                  <a href={`https://wa.me/${siteSettings.phoneIntl}`} target="_blank" rel="noopener" className="btn-ghost">💬 WhatsApp</a>
+                  <Link href="/contact#calendly" className="btn-gold">
+                    <span aria-hidden="true">📅</span>
+                    <span>קבעו פגישה</span>
+                  </Link>
+                  <a href={`https://wa.me/${siteSettings.phoneIntl}`} target="_blank" rel="noopener" className="btn-ghost">
+                    <span aria-hidden="true">💬</span>
+                    <span>WhatsApp</span>
+                  </a>
                 </div>
               </div>
             </Reveal>

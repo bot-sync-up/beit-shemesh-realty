@@ -73,15 +73,16 @@ export default function TestimonialsPage() {
         {/* SUMMARY STATS */}
         <section className="bg-white border-y border-[#1D9E75]/10 py-14">
           <div className="container-x grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {[
-              { v: "500+", l: "עסקאות סגורות" },
-              { v: "98%", l: "לקוחות מרוצים" },
-              { v: "4.9★", l: "דירוג ממוצע" },
-              { v: "70%", l: "מגיעים מהפניה" },
-            ].map((s) => (
-              <div key={s.l}>
-                <div className="text-4xl md:text-5xl font-extrabold gradient-text mb-1.5">{s.v}</div>
-                <div className="text-sm text-[#5A6B66] font-semibold">{s.l}</div>
+            {siteSettings.stats.map((s) => (
+              <div key={s.label}>
+                <div
+                  className="text-4xl md:text-5xl font-extrabold gradient-text mb-1.5"
+                  dir="ltr"
+                  style={{ unicodeBidi: "isolate" }}
+                >
+                  {s.value}
+                </div>
+                <div className="text-sm text-[#5A6B66] font-semibold">{s.label}</div>
               </div>
             ))}
           </div>
@@ -98,8 +99,14 @@ export default function TestimonialsPage() {
                 בואו נדבר. בלי מחויבות, בלי לחץ — רק לראות איך אפשר לעזור לכם.
               </p>
               <div className="flex flex-wrap justify-center gap-3">
-                <a href={`https://wa.me/${siteSettings.phoneIntl}`} target="_blank" rel="noopener" className="btn-primary">💬 דברו איתי</a>
-                <Link href="/contact#calendly" className="btn-gold">📅 קבעו פגישה</Link>
+                <a href={`https://wa.me/${siteSettings.phoneIntl}`} target="_blank" rel="noopener" className="btn-primary">
+                  <span aria-hidden="true">💬</span>
+                  <span>דברו איתי</span>
+                </a>
+                <Link href="/contact#calendly" className="btn-gold">
+                  <span aria-hidden="true">📅</span>
+                  <span>קבעו פגישה</span>
+                </Link>
               </div>
             </Reveal>
           </div>

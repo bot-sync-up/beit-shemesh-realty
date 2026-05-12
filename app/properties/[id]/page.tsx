@@ -42,7 +42,10 @@ export default async function PropertyPage({ params }: { params: Promise<RoutePa
 
   const sold = property.status === "sold";
   const waText = `שלום, אני מתעניין/ת ב: ${property.title} (${property.priceLabel})`;
-  const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(property.address)}&z=15&output=embed`;
+  const mapQuery = property.lat && property.lng
+    ? `${property.lat},${property.lng}`
+    : encodeURIComponent(property.address);
+  const mapSrc = `https://www.google.com/maps?q=${mapQuery}&z=17&output=embed`;
 
   return (
     <>
@@ -98,10 +101,12 @@ export default async function PropertyPage({ params }: { params: Promise<RoutePa
               </div>
               <div className="flex flex-col gap-2">
                 <a href={`https://wa.me/${siteSettings.phoneIntl}?text=${encodeURIComponent(waText)}`} target="_blank" rel="noopener" className="btn-primary justify-center">
-                  💬 שלחו הודעה בוואטסאפ
+                  <span aria-hidden="true">💬</span>
+                  <span>שלחו הודעה בווטסאפ</span>
                 </a>
                 <a href={`tel:${siteSettings.phoneRaw}`} className="btn-gold justify-center">
-                  📞 {siteSettings.phone}
+                  <span aria-hidden="true">📞</span>
+                  <span dir="ltr" style={{ unicodeBidi: "isolate" }}>{siteSettings.phone}</span>
                 </a>
                 <Link href="/contact" className="text-center text-[#0F6E56] font-bold text-sm hover:underline mt-1">
                   או שלחו טופס בקשה
@@ -171,10 +176,10 @@ export default async function PropertyPage({ params }: { params: Promise<RoutePa
                   </p>
                   <div className="flex flex-col gap-2">
                     <a href={`https://wa.me/${siteSettings.phoneIntl}?text=${encodeURIComponent(waText)}`} target="_blank" rel="noopener" className="bg-white text-[#0F6E56] font-bold rounded-full py-2.5 text-center hover:bg-emerald-50 transition">
-                      💬 שלחו לי וואטסאפ
+                      <span aria-hidden="true">💬</span> שלחו לי ווטסאפ
                     </a>
                     <Link href="/contact#calendly" className="bg-white/15 backdrop-blur border border-white/30 text-white font-bold rounded-full py-2.5 text-center hover:bg-white/25 transition">
-                      📅 קביעת פגישה
+                      <span aria-hidden="true">📅</span> קביעת פגישה
                     </Link>
                   </div>
                 </div>

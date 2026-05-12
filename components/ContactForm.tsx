@@ -101,10 +101,11 @@ export default function ContactForm() {
       </Field>
 
       <label className="flex items-start gap-2 text-sm text-[#5A6B66] cursor-pointer">
-        <input type="checkbox" name="consent" className="mt-1 accent-[#0F6E56]" />
+        <input type="checkbox" name="consent" required aria-required="true" className="mt-1 accent-[#0F6E56]" />
         <span>
+          <span className="text-red-600 font-bold" aria-hidden="true">* </span>
           קראתי ואישרתי את <a href="/privacy" className="text-[#0F6E56] underline">מדיניות הפרטיות</a> ואני מסכים/ה לקבל
-          חזרה ממתווך הכתובת הנכונה בקשר לפנייתי.
+          חזרה ממתווך הכתובת הנכונה בקשר לפנייתי. <span className="sr-only">(שדה חובה)</span>
         </span>
       </label>
 
