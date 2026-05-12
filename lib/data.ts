@@ -59,6 +59,21 @@ export const allNeighborhoods = neighborhoods as Neighborhood[];
 export const allTestimonials = testimonials as Testimonial[];
 export const siteSettings = settings as Settings;
 const seedProperties = propertiesJson as Property[];
+const seedNeighborhoods = neighborhoods as Neighborhood[];
+const seedTestimonials = testimonials as Testimonial[];
+const seedSettings = settings as Settings;
+
+export const getSettings = cache(async (): Promise<Settings> => {
+  return (await getJson<Settings>("data/settings.json")) ?? seedSettings;
+});
+
+export const getTestimonials = cache(async (): Promise<Testimonial[]> => {
+  return (await getJson<Testimonial[]>("data/testimonials.json")) ?? seedTestimonials;
+});
+
+export const getNeighborhoods = cache(async (): Promise<Neighborhood[]> => {
+  return (await getJson<Neighborhood[]>("data/neighborhoods.json")) ?? seedNeighborhoods;
+});
 
 export const getAllProperties = cache(async (): Promise<Property[]> => {
   const fromStore = await getJson<Property[]>("data/properties.json");

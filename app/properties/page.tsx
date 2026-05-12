@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PropertiesExplorer from "@/components/PropertiesExplorer";
-import { getActiveProperties, allNeighborhoods } from "@/lib/data";
+import { getActiveProperties, getNeighborhoods } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: 'נכסים זמינים | דירות למכירה ולהשכרה בבית שמש',
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function PropertiesPage() {
-  const properties = await getActiveProperties();
-  const neighborhoods = Array.from(new Set(allNeighborhoods.map(n => n.name)));
+  const [properties, nbs] = await Promise.all([getActiveProperties(), getNeighborhoods()]);
+  const neighborhoods = Array.from(new Set(nbs.map((n) => n.name)));
 
   return (
     <>

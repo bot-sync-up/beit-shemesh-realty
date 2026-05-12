@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import PropertyGallery from "@/components/PropertyGallery";
 import PropertyCard from "@/components/PropertyCard";
 import Reveal from "@/components/Reveal";
-import { getAllProperties, getPropertyById, siteSettings } from "@/lib/data";
+import { getAllProperties, getPropertyById, getSettings } from "@/lib/data";
 
 type RouteParams = { id: string };
 
@@ -40,10 +40,13 @@ export async function generateMetadata(
 
 export default async function PropertyPage({ params }: { params: Promise<RouteParams> }) {
   const { id } = await params;
-  const property = await getPropertyById(parseInt(id, 10));
+  const [property, all, siteSettings] = await Promise.all([
+    getPropertyById(parseInt(id, 10)),
+    getAllProperties(),
+    getSettings(),
+  ]);
   if (!property) notFound();
 
-  const all = await getAllProperties();
   const related = all
     .filter((p) => p.id !== property.id && p.neighborhood === property.neighborhood && p.status === "active")
     .slice(0, 3);

@@ -3,7 +3,9 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
-import { siteSettings } from "@/lib/data";
+import { getSettings } from "@/lib/data";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "אודותי",
@@ -12,7 +14,8 @@ export const metadata: Metadata = {
   openGraph: { url: "/about" },
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const siteSettings = await getSettings();
   return (
     <>
       <Navbar transparentTop />

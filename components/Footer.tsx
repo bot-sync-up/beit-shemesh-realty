@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Logo from "./Logo";
-import settings from "@/data/settings.json";
+import { getSettings } from "@/lib/data";
 
 const footerLinks = [
   {
@@ -35,7 +35,8 @@ const footerLinks = [
   },
 ];
 
-export default function Footer() {
+export default async function Footer() {
+  const settings = await getSettings();
   return (
     <footer className="relative bg-[#0E1B17] text-gray-300 pt-20 pb-8 overflow-hidden">
       <div

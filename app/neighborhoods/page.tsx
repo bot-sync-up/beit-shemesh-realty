@@ -4,7 +4,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import NeighborhoodsMap from "@/components/NeighborhoodsMap";
-import { allNeighborhoods, siteSettings } from "@/lib/data";
+import { getNeighborhoods, getSettings } from "@/lib/data";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "אזורי פעילות ושכונות בית שמש",
@@ -13,7 +15,8 @@ export const metadata: Metadata = {
   openGraph: { url: "/neighborhoods" },
 };
 
-export default function NeighborhoodsPage() {
+export default async function NeighborhoodsPage() {
+  const [allNeighborhoods, siteSettings] = await Promise.all([getNeighborhoods(), getSettings()]);
   return (
     <>
       <Navbar transparentTop />

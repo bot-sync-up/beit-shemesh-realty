@@ -4,14 +4,20 @@ import Footer from "@/components/Footer";
 import PropertyCard from "@/components/PropertyCard";
 import Counter from "@/components/Counter";
 import Reveal from "@/components/Reveal";
-import { getFeaturedProperties, allTestimonials, siteSettings, allNeighborhoods } from "@/lib/data";
+import { getFeaturedProperties, getTestimonials, getSettings, getNeighborhoods } from "@/lib/data";
 
 export const revalidate = 60;
 
 export default async function Home() {
-  const featured = (await getFeaturedProperties()).slice(0, 6);
-  const testimonials = allTestimonials.slice(0, 3);
-  const topNeighborhoods = allNeighborhoods.slice(0, 4);
+  const [featured, allTestList, allNbs, siteSettings] = await Promise.all([
+    getFeaturedProperties(),
+    getTestimonials(),
+    getNeighborhoods(),
+    getSettings(),
+  ]);
+  const featuredList = featured.slice(0, 6);
+  const testimonials = allTestList.slice(0, 3);
+  const topNeighborhoods = allNbs.slice(0, 4);
 
   return (
     <>
@@ -198,7 +204,7 @@ export default async function Home() {
             </Reveal>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {featured.map((p, i) => (
+              {featuredList.map((p, i) => (
                 <Reveal key={p.id} delay={i * 80}>
                   <PropertyCard property={p} />
                 </Reveal>
