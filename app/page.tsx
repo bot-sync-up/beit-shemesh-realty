@@ -6,8 +6,10 @@ import Counter from "@/components/Counter";
 import Reveal from "@/components/Reveal";
 import { getFeaturedProperties, allTestimonials, siteSettings, allNeighborhoods } from "@/lib/data";
 
-export default function Home() {
-  const featured = getFeaturedProperties().slice(0, 6);
+export const revalidate = 60;
+
+export default async function Home() {
+  const featured = (await getFeaturedProperties()).slice(0, 6);
   const testimonials = allTestimonials.slice(0, 3);
   const topNeighborhoods = allNeighborhoods.slice(0, 4);
 

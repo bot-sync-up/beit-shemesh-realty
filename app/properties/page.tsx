@@ -12,8 +12,10 @@ export const metadata: Metadata = {
   openGraph: { url: "/properties" },
 };
 
-export default function PropertiesPage() {
-  const properties = getActiveProperties();
+export const revalidate = 60;
+
+export default async function PropertiesPage() {
+  const properties = await getActiveProperties();
   const neighborhoods = Array.from(new Set(allNeighborhoods.map(n => n.name)));
 
   return (
