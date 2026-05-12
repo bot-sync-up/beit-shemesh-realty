@@ -15,7 +15,7 @@ const assistant = Assistant({
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
-  "https://haktovet-hanevona.mad4113633.workers.dev";
+  "https://haktovet-hanevona.syncup.co.il";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
