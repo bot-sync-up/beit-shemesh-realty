@@ -36,11 +36,11 @@ export const metadata: Metadata = {
     "פנטהאוז בית שמש",
   ],
   authors: [{ name: "הכתובת הנכונה" }],
-  alternates: { canonical: SITE_URL },
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "he_IL",
-    url: SITE_URL,
+    url: "/",
     siteName: "הכתובת הנכונה",
     title: 'הכתובת הנכונה | תיווך נדל"ן בבית שמש',
     description:

@@ -8,6 +8,8 @@ import { allTestimonials, siteSettings } from "@/lib/data";
 export const metadata: Metadata = {
   title: "המלצות לקוחות",
   description: "מה אומרים עליי הלקוחות שלי. סיפורים אמיתיים מתוך 500+ עסקאות בבית שמש.",
+  alternates: { canonical: "/testimonials" },
+  openGraph: { url: "/testimonials" },
 };
 
 export default function TestimonialsPage() {

@@ -20,12 +20,15 @@ export async function generateMetadata(
   const { id } = await params;
   const property = getPropertyById(parseInt(id, 10));
   if (!property) return { title: "נכס לא נמצא" };
+  const path = `/properties/${id}`;
   return {
     title: `${property.title}`,
     description: property.shortDescription,
+    alternates: { canonical: path },
     openGraph: {
       title: property.title,
       description: property.shortDescription,
+      url: path,
       images: property.images.length ? property.images.map((src) => ({ url: src })) : undefined,
     },
   };

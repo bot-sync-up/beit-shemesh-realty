@@ -8,6 +8,8 @@ import { siteSettings } from "@/lib/data";
 export const metadata: Metadata = {
   title: "צור קשר",
   description: "שלחו לי הודעה, התקשרו או קבעו פגישה אישית. ייעוץ ראשוני חינם, ללא התחייבות.",
+  alternates: { canonical: "/contact" },
+  openGraph: { url: "/contact" },
 };
 
 export default function ContactPage() {
