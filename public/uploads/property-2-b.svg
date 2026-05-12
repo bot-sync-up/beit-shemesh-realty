@@ -1,14 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 800" preserveAspectRatio="xMidYMid slice">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0F6E56"/>
-      <stop offset="1" stop-color="#BA7517"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 800" preserveAspectRatio="xMidYMid slice"><defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#DBEFE2"/>
+      <stop offset="1" stop-color="#9BD2A8"/>
     </linearGradient>
-    <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse">
-      <circle cx="2" cy="2" r="1.5" fill="white" opacity="0.08"/>
+    <linearGradient id="wallG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F1F7F4"/>
+      <stop offset="1" stop-color="#F1F7F4" stop-opacity="0.85"/>
+    </linearGradient>
+    <pattern id="dots" width="36" height="36" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.4" fill="white" opacity="0.18"/>
     </pattern>
   </defs>
-  <rect width="1600" height="800" fill="url(#g)"/>
+  <rect width="1600" height="800" fill="url(#sky)"/>
   <rect width="1600" height="800" fill="url(#dots)"/>
-  <rect x="600" y="300" width="500" height="300" fill="white" opacity="0.15" rx="8"/><rect x="640" y="450" width="180" height="120" fill="white" opacity="0.35" rx="12"/><rect x="850" y="450" width="180" height="120" fill="white" opacity="0.35" rx="12"/><rect x="730" y="380" width="240" height="60" fill="white" opacity="0.45" rx="6"/>
-</svg>
+    <rect x="0" y="640" width="1600" height="160" fill="#1D9E75" opacity="0.85"/>
+   <rect x="0" y="640" width="1600" height="160" fill="url(#dots)"/>
+    <rect width="1600" height="800" fill="#F1F7F4" opacity="0.95"/>
+    <rect width="1600" height="800" fill="url(#dots)"/>
+    <!-- floor -->
+    <rect x="0" y="600" width="1600" height="200" fill="#094534" opacity="0.18"/>
+    <!-- window with view -->
+    <rect x="160" y="160" width="420" height="320" fill="#DBEFE2"/>
+    <rect x="160" y="160" width="420" height="320" fill="url(#sky)"/>
+    <line x1="370" y1="160" x2="370" y2="480" stroke="#F1F7F4" stroke-width="6"/>
+    <line x1="160" y1="320" x2="580" y2="320" stroke="#F1F7F4" stroke-width="6"/>
+    <rect x="140" y="140" width="460" height="360" fill="none" stroke="#094534" stroke-width="10"/>
+    <!-- sofa -->
+    <rect x="720" y="460" width="640" height="140" rx="22" fill="#0F6E56" opacity="0.85"/>
+    <rect x="740" y="430" width="180" height="80" rx="14" fill="#0F6E56"/>
+    <rect x="940" y="430" width="180" height="80" rx="14" fill="#0F6E56"/>
+    <rect x="1160" y="430" width="180" height="80" rx="14" fill="#0F6E56"/>
+    <!-- coffee table -->
+    <rect x="830" y="640" width="420" height="40" rx="6" fill="#094534"/>
+    <!-- lamp -->
+    <line x1="1430" y1="600" x2="1430" y2="320" stroke="#094534" stroke-width="6"/>
+    <path d="M 1390 320 L 1470 320 L 1450 260 L 1410 260 Z" fill="#EF9F27"/>
+    <circle cx="1430" cy="600" r="36" fill="#094534"/>
+  </svg>

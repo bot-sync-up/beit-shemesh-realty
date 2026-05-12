@@ -1,14 +1,55 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 800" preserveAspectRatio="xMidYMid slice">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#EF9F27"/>
-      <stop offset="1" stop-color="#1D9E75"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 800" preserveAspectRatio="xMidYMid slice"><defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F7D8A5"/>
+      <stop offset="1" stop-color="#E29C82"/>
     </linearGradient>
-    <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse">
-      <circle cx="2" cy="2" r="1.5" fill="white" opacity="0.08"/>
+    <linearGradient id="wallG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FBE9D0"/>
+      <stop offset="1" stop-color="#FBE9D0" stop-opacity="0.85"/>
+    </linearGradient>
+    <pattern id="dots" width="36" height="36" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.4" fill="white" opacity="0.18"/>
     </pattern>
   </defs>
-  <rect width="1600" height="800" fill="url(#g)"/>
+  <rect width="1600" height="800" fill="url(#sky)"/>
   <rect width="1600" height="800" fill="url(#dots)"/>
-  <circle cx="400" cy="500" r="80" fill="white" opacity="0.3"/><circle cx="900" cy="480" r="100" fill="white" opacity="0.3"/><circle cx="1200" cy="520" r="70" fill="white" opacity="0.3"/><rect x="0" y="600" width="1600" height="200" fill="white" opacity="0.18"/><path d="M 800 600 L 770 500 L 830 500 Z" fill="white" opacity="0.5"/>
-</svg>
+    <rect x="0" y="640" width="1600" height="160" fill="#5E3A52" opacity="0.85"/>
+   <rect x="0" y="640" width="1600" height="160" fill="url(#dots)"/>
+    
+    <rect x="174.75" y="602.25" width="10.5" height="57.75" fill="#3A2032"/>
+    <ellipse cx="180" cy="592.25" rx="31.5" ry="57.75" fill="#5E3A52" opacity="0.95"/>
+    <ellipse cx="167.4" cy="577.25" rx="18.9" ry="48.125" fill="#5E3A52" opacity="0.8"/>
+    <ellipse cx="192.6" cy="577.25" rx="18.9" ry="48.125" fill="#5E3A52" opacity="0.85"/>
+  
+    
+    <rect x="1415.5" y="610.5" width="9" height="49.5" fill="#3A2032"/>
+    <ellipse cx="1420" cy="600.5" rx="27" ry="49.5" fill="#5E3A52" opacity="0.95"/>
+    <ellipse cx="1409.2" cy="585.5" rx="16.2" ry="41.25" fill="#5E3A52" opacity="0.8"/>
+    <ellipse cx="1430.8" cy="585.5" rx="16.2" ry="41.25" fill="#5E3A52" opacity="0.85"/>
+  
+    
+  <circle cx="1280" cy="200" r="70" fill="#EF9F27" opacity="0.55"/>
+  <circle cx="1280" cy="200" r="44" fill="#EF9F27" opacity="0.9"/>
+
+    <rect x="500" y="380" width="620" height="260" fill="url(#wallG)"/>
+    <rect x="490" y="370" width="640" height="22" fill="#3A2032"/>
+    <rect x="540" y="410" width="90" height="70" fill="#EF9F27" opacity="0.85"/>
+   <line x1="585" y1="410" x2="585" y2="480" stroke="#FBE9D0" stroke-width="3"/>
+   <line x1="540" y1="445" x2="630" y2="445" stroke="#FBE9D0" stroke-width="3"/>
+    <rect x="660" y="410" width="90" height="70" fill="#0F6E56" opacity="0.5"/>
+   <line x1="705" y1="410" x2="705" y2="480" stroke="#FBE9D0" stroke-width="3"/>
+   <line x1="660" y1="445" x2="750" y2="445" stroke="#FBE9D0" stroke-width="3"/>
+    <rect x="880" y="410" width="90" height="70" fill="#0F6E56" opacity="0.5"/>
+   <line x1="925" y1="410" x2="925" y2="480" stroke="#FBE9D0" stroke-width="3"/>
+   <line x1="880" y1="445" x2="970" y2="445" stroke="#FBE9D0" stroke-width="3"/>
+    <rect x="1000" y="410" width="90" height="70" fill="#EF9F27" opacity="0.85"/>
+   <line x1="1045" y1="410" x2="1045" y2="480" stroke="#FBE9D0" stroke-width="3"/>
+   <line x1="1000" y1="445" x2="1090" y2="445" stroke="#FBE9D0" stroke-width="3"/>
+    <rect x="760" y="500" width="100" height="140" fill="#3A2032"/>
+    <rect x="770" y="510" width="80" height="120" fill="#EF9F27" opacity="0.6"/>
+    <!-- garden -->
+    <rect x="500" y="640" width="620" height="20" fill="#5E3A52"/>
+    <ellipse cx="600" cy="660" rx="60" ry="14" fill="#5E3A52" opacity="0.8"/>
+    <ellipse cx="900" cy="668" rx="80" ry="16" fill="#5E3A52" opacity="0.8"/>
+    <rect x="540" y="660" width="540" height="6" fill="#0F6E56" opacity="0.5"/>
+  </svg>
